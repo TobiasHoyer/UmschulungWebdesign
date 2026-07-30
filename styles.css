@@ -1,0 +1,63 @@
+
+/*body*/
+body {
+  background-image: url(./Projekt2/Gruppe5/assets/pilz.jpg) ;
+  background-size: cover;
+  background-position: center ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/*Tabellen*/
+
+table caption {
+margin-bottom: 1em;
+font-weight: bold;
+}
+
+table {
+  background-color: grey;
+  border-collapse: collapse;
+  border: 2px solid black;
+  margin: auto;
+}
+
+th {
+  background-color: rgb(252, 145, 5)
+}
+th, td {
+  padding: 20px;
+  border: 2px solid black;
+}
+
+tbody tr td:first-child{
+background-color: rgb(245, 164, 58)
+}
+
+tr td a:link {
+  color:rgb(248, 236, 11)
+}
+
+tr td a:hover {
+  color:orange;
+}
+
+/*IDs*/
+
+#schule {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#kraftwerk {
+font-family: Playwrite BR, sans-serif;
+text-shadow: 5px 5px 5px red;
+text-align: center;
+}
+
+#kaffee {
+    font-family: ;
+    color: rgb(75, 13, 13);
+    text-shadow: 5px 5px 5px black;
+    text-align:center
+}

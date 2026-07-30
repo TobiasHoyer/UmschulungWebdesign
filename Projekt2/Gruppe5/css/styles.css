@@ -1,0 +1,197 @@
+
+/*body*/
+body {
+  background-image: url(../assets/pilz.jpg) ;
+  background-size: cover;
+  background-position: center ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/*Navigationsbereiche*/
+
+nav{
+  text-align:center;
+}
+
+nav ul {
+ 
+  border: 2px solid black ;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display:inline-flex;
+  background:linear-gradient(to right, orange, red);
+  justify-content: center;
+  box-shadow: 3px 3px 0px;
+  max-width: 960px;
+}
+
+nav ul li a {
+  display: block;
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav ul li:hover {
+  background-color: rgb(144, 144, 144);
+}
+
+
+/*Headlines*/
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 350%;
+  font-family: Abril Fatface, sans-serif, serif;
+  text-shadow: 5px 5px 10px red;
+}
+
+h2 {
+ text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+/*container*/
+
+figure {
+  text-align: center;
+  margin: auto;
+  width: fit-content;
+}
+
+figure img {
+  border-style: inset;
+  border-width: 3px;
+}
+
+figcaption {
+  font-style: italic;
+  text-align: center;
+}
+
+/*Tabellen*/
+
+table caption {
+margin-bottom: 1em;
+font-weight: bold;
+}
+
+table {
+  background-color: grey;
+  border-collapse: collapse;
+  border: 2px solid black;
+  margin: auto;
+}
+
+th {
+  background-color: rgb(252, 145, 5)
+}
+th, td {
+  padding: 20px;
+  border: 2px solid black;
+}
+
+tbody tr td:first-child{
+background-color: rgb(245, 164, 58)
+}
+
+tr td a:link {
+  color:rgb(248, 236, 11)
+}
+
+tr td a:hover {
+  color:orange;
+}
+
+/*Formulare*/
+
+form {
+  text-align: center;
+}
+
+form fieldset {
+  text-align: center;
+  display:inline-block;
+  margin: 0 auto;
+  border-style: inset;
+ 
+}
+
+input:focus {
+  outline: 2px solid red
+}
+
+input::placeholder {
+  font-style: italic;
+
+}
+
+
+/*Klassen*/
+
+.data {
+color: chartreuse;
+}
+
+.sicherheit {
+  text-decoration:underline
+}
+
+.zentriert {
+  text-align: center;
+
+}
+
+.Liste {
+  padding: 0;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.fett {
+  font-weight: bold;
+}
+
+.historie {
+  padding: 0;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.historie li {
+  list-style: none;
+  margin-bottom: 1em;
+}
+
+
+.container {
+
+  max-width: 960px;
+  margin: 0 auto;
+
+}
+
+/*IDs*/
+
+#Schule {
+font-family: Playwrite BR, sans-serif
+}
+
+#senden {
+  box-shadow: 5px 5px 0px;
+  border: 2px solid black;
+  background: linear-gradient(to right, orange, red);
+}
+
+#senden:hover {
+  background-image: none;
+  background-color:grey;
+  box-shadow: 2px 2px 0px black;
+  transform: translate(2px, 2px);
+}

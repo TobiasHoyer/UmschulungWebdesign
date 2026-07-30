@@ -1,0 +1,723 @@
+
+        "use strict";
+
+         //Variablen
+
+            const displayElement = document.getElementById("anzeige");
+            const powerButton = document.getElementById("power");
+
+            let power = false;
+
+            const balkenBreite = 10;
+
+            const maxBohnen = 100;
+            let bohnen = maxBohnen;
+
+            const maxWasser = 2;
+            let wasser = maxWasser;
+
+            const maxMilch = 2;
+            let milch = maxMilch;
+
+            const maxBrühe = 100;
+            let brühe = maxBrühe;
+
+            const maxKakao = 100;
+            let kakao = maxKakao;
+
+            let gebruehteGetraenke = 0;
+            let durchgängeSeitreinigung = 0;
+
+            const zahlungsArten = ["Bargeld", "Karte"];
+
+            let guthaben = 0;
+            let bezahlt = false;
+
+            const getränke = ["Kaffee", "Brühe", "Kakao", "Milch"];            
+            const preise = [1.5, 2.3, 1.3, 1];
+
+            let statKaffee = 0;
+            let statBrühe = 0;
+            let statKakao = 0;
+            let statMilch = 0;
+
+            let bewertung5 = 0;
+            let bewertung4 = 0;
+            let bewertung3 = 0;
+
+            let bewertung2 = 0;
+
+            let bewertung1 = 0;
+
+            let anzahlBewertungen = 0;
+
+            let fehler = 0;
+
+            let geheimnis = false;
+            let frage1 = false;
+            let frage2 = false; 
+
+
+            const display = ["Wasser (l): " , "Milch (l): " , "Bohnen: ", "Kakao: " , "Brühe: "];
+            const hauptMenü = ["Getränke", "Auffüllen", "Reinigen", "Statistik",  "\nAbschalten" , "\n?\n"];
+
+
+                        //Funktionen
+
+
+            function anAus() {                                  //Ein-/Asusschalten
+                power = !power;
+                geheimnis = false;
+            }
+
+            function statusAnAUs() {                    //Status An/Aus
+               switch(power){
+                case true:
+                    displayElement.innerText = "Die Maschine ist an.";
+                    break;
+                case false: 
+                    displayElement.innerText = "Die Maschine ist aus.";
+                    break;
+               }
+            }
+
+            function statusAnAus() {
+                if(power){
+                    displayElement.innerText = "Die Maschine ist an.";
+                }
+                else{
+                    displayElement.innerText = "Die Maschine ist aus.";
+                }
+            }
+
+
+            function anzeige(){                                 //Display
+                const displayStats = [wasser.toPrecision(2), milch.toPrecision(2), bohnen, kakao, brühe];
+
+                for(let i = 0; i < display.length; i++){
+                    console.log( display[i] + displayStats[i]);
+                }
+                if(durchgängeSeitreinigung >= 5){
+                    console.log("ACHTUNG! Maschine muss gereinigt werden");
+                }
+                if(wasser < 0.5 || milch < 0.5 || bohnen < 30 || kakao < 30 || brühe < 30){
+                    console.log("ACHTUNG! Füllstände beachten und auffüllen!");
+                }
+            }
+
+        async function fehlermeldung(){                                             //Fehlermeldung
+            terminal.clear();
+            console.log("Fehler! Eingabe wiederholen");
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+        }
+  
+        async function abbruch() {                                              //Vorgang abbrechen
+            terminal.clear();        
+            console.log("Vorgang wird abgebrochen");
+            await new Promise(resolve => setTimeout(resolve, 800));
+        }
+
+        async function hauptmenü() {   
+            terminal.clear();
+            anzeige();                                          //Hauptmenü
+            if(geheimnis){
+                console.log("\nWas möchten Sie tun?\n" + hauptMenü.join("\n") + ("\nSpezial"));
+            }
+            else{
+                console.log("\nWas möchten Sie tun?\n" + hauptMenü.join("\n"));
+            }
+            let auswahl = await terminal.ask(">");
+            return auswahl;
+        }
+      
+        async function statistikAnzeigen() {                                       //Statistikmenü
+
+            const statistik = [statKaffee, statBrühe, statKakao, statMilch];
+            const durschschnittsBewertung = ((bewertung1 * 1 + bewertung2 * 2 + bewertung3 * 3  + bewertung4 *4 + bewertung5 * 5)/anzahlBewertungen);
+
+            for(let i = 0; i < getränke.length; i++){
+            console.log(getränke[i] + ": " +  statistik[i]);}
+            console.log("Gesamt: " + gebruehteGetraenke);
+                if(durschschnittsBewertung > 0){
+                    console.log("\n\nDurchschnittliche Bewertung: " + durschschnittsBewertung.toPrecision(2));
+                }
+                await terminal.ask("Beliebige Taste drücken>");
+        }
+
+            async function auffüllen(){                            //Auffüllen
+
+                const optionen = ["Wasser", "Milch", "Bohnen", "Kakao", "Brühe", "Alles", "Abbrechen"];
+
+                terminal.clear();
+                anzeige();
+
+                console.log("\nWas möchten Sie auffüllen?\n" + optionen.join("\n"));
+                const auswahl = await terminal.ask("Wählen Sie>");
+
+                if(optionen.includes(auswahl.charAt(0).toUpperCase() + auswahl.slice(1).toLowerCase())){    
+                    switch(auswahl.toLowerCase()){    
+
+                        case"wasser":
+                            wasser = maxWasser;
+                            break;
+
+                        case"milch":
+                            milch = maxMilch;
+                            break;
+
+                        case"bohnen":
+                            bohnen = maxBohnen;
+                            break;
+
+                        case"kakao":
+                            kakao = maxKakao;
+                            break;
+
+                        case"brühe":
+                            brühe = maxBrühe;
+                            break;
+
+
+                        case"alles":
+                            wasser = maxWasser;
+                            milch = maxMilch;
+                            bohnen = maxBohnen;
+                            kakao = maxKakao;
+                            brühe = maxBrühe;
+                            break;
+
+                        case"abbrechen":
+                            await abbruch();
+                    }
+                }
+                else {
+                    await fehlermeldung();
+                    await auffüllen();
+                }  
+            }
+        
+        
+        async function fuehreReinigungAus() {                                     //Reinigungsmenü
+
+            console.log("Vorgänge seit letzter Reinigung: " + durchgängeSeitreinigung);
+            let reinigen = await terminal.ask("Reinigungsforgang starten? J/N>");
+
+            switch(reinigen.toLowerCase()){
+
+                case"j":
+
+                    console.log("\n[Reinigung] Reinigungsprozess gestartet...");
+
+                    const balkenBreite = 5;
+
+                    for (let i = 0; i <= balkenBreite; i++) {
+
+                        terminal.clear();
+                        console.log("[Reinigung] System wird gespült...");
+
+                        let geladen = "*".repeat(i);
+                        let leer = "-".repeat(balkenBreite - i);
+
+                        console.log(`[${geladen}${leer}]`);
+                        console.log("[Reinigung] Maschine ist wieder sauber!\n");
+                        await new Promise(resolve => setTimeout(resolve, 400));
+                    }
+                    durchgängeSeitreinigung = 0;
+                    break;
+
+                case"n":
+                    await abbruch();
+                    break;
+
+                default:
+                    await fehlermeldung();
+                    await fuehreReinigungAus();
+            }
+            }
+
+        
+            async function getränkeMenü(){                                                           //GetränkeMenü
+
+                console.log("\n" + getränke.join("\n") + "\nAbbruch");
+                const auswahl = await terminal.ask("Bitte wählen:>");
+
+                const getränkeWahl = auswahl.charAt(0).toUpperCase() + auswahl.slice(1).toLowerCase();
+
+                if(getränke.includes(getränkeWahl)){
+                return getränkeWahl;
+                }
+                else{
+                    await fehlermeldung();
+                    return await getränkeMenü();
+                }
+            }
+
+            
+        async function bezahlen(getraenk) {                                             //Bezahlfunktion
+            terminal.clear();
+            console.log("Auswahl Bezahlen: " + getraenk);
+            const preis = preise[getränke.indexOf(getraenk)];
+            console.log("Preis: " + preis.toPrecision(3) + " Euro");
+            console.log("Wie Möchten sie Bezahlen?");
+            console.log("\n" + zahlungsArten.join("\n") + "\nAbbruch");
+            const bezahlungArt = await terminal.ask("Bitte wählen:>");
+            let geld;
+            if (bezahlungArt.toLowerCase() == "bargeld") {
+                geld = parseFloat(await terminal.ask("Bitte geben sie Geld ein >"))
+            }
+
+            while (!bezahlt) {
+                if (bezahlungArt.toLowerCase() === "bargeld") {
+                    if (geld === preis) {
+                        console.log("Zahlung Erfolgreich!")
+                        await terminal.ask("Any Key to Continue>")
+                        bezahlt = true;
+                    }
+                    else if (geld < preis) {
+                        let gebraucht = preis - geld;
+                        gebraucht = gebraucht.toFixed(2);
+                        console.log("Es müssen noch " + gebraucht.toPrecision(3) + " Euro gezahlt werden");
+                        geld = geld + parseFloat(await terminal.ask(">"));
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
+                    else {
+                        let rueckgeld = geld - preis;
+                        rueckgeld = rueckgeld.toFixed(2);
+
+                        terminal.clear();
+                        console.log("Zahlung Erfolgreich!")
+                        console.log("Rückgeld: " + rueckgeld + " Euro")
+                        await terminal.ask("Any Key to Continue>")
+                        bezahlt = true;
+
+                    }
+                } else if (bezahlungArt.toLowerCase() === "karte") {
+                    terminal.clear();
+                    await terminal.ask("Bitte Karten Daten Eingeben:>");
+
+                    if (kartenUeberpruefung()) {
+                        bezahlt = true;
+                        terminal.clear();
+                        console.log("Zahlung Erfolgreich!");
+                        await terminal.ask("Any Key to Continue>")
+                    } 
+                    else {
+                        terminal.clear();
+                        console.log("Zahlung Nicht Erfolgreich, bitte Versuchen sie es erneut")
+                        await terminal.ask("Any Key to Continue>")
+
+                    }
+                }
+                else if(bezahlungArt.toLowerCase() === "abbruch"){
+                    await abbruch();
+                    await hauptmenü();
+                }  
+                else {
+                    terminal.clear();
+                    await terminal.ask("Diese Zahlungsart ist nicht Möglich, bitte versuchen sie es erneut");
+                    terminal.clear();
+                    await bezahlen(getraenk);
+                }
+            }
+            return bezahlt;
+        }
+
+        function kartenUeberpruefung(karte, preis) {                                 //Kartenzahlungsfunktion
+            return true;
+        }
+
+                    async function bruehfunktion(wasZubereiten) {                       //Brühfunktion
+
+                    if(wasZubereiten){
+
+                            let genugStoff = await betriebsstoffePrüfen(wasZubereiten);
+
+                            if(genugStoff && gebruehteGetraenke < 5){
+                                for (let i = 0; i <= balkenBreite; i++) {
+                                    terminal.clear();
+                                    console.log(wasZubereiten + " wird zubereitet.");
+                                    let geladen = "#".repeat(i);
+                                    let leer = "-".repeat(balkenBreite - i);
+                                    console.log(`[${geladen}${leer}]`);
+                                    await new Promise(resolve => setTimeout(resolve, 300));
+                                    terminal.clear();  
+                                }
+                                console.log(wasZubereiten + " ist fertig.");
+                                await terminal.ask("Getränk entnehmen");
+                                return wasZubereiten;
+                            }
+                            else{
+                                await ständeNiedrig();
+                            }
+                    }
+                    else if(wasZubereiten.toLowerCase() === "abbruch"){
+                        await abbruch();
+                    }
+                    else{
+                        await fehlermeldung();
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                        terminal.clear();
+                        anzeige();
+                        const neueWahl = await getränkeMenü();
+                        return await bruehfunktion(neueWahl);
+                    }
+            }
+
+
+
+        async function betriebsstoffePrüfen(getränk){                           //Betriebsstoffe prüfen
+
+            let fest ="";
+            let flüssig = "";
+
+
+            if(getränk.toLowerCase() === "kaffee"){
+                fest = bohnen;
+                flüssig = wasser;
+            }
+            else if(getränk.toLowerCase() === "brühe"){
+                fest = brühe;
+                flüssig = wasser;
+            }
+            else if(getränk.toLowerCase() === "kakao"){
+                fest = kakao;
+                flüssig = milch;
+            }
+            else if(getränk.toLowerCase() === "milch"){
+                flüssig = milch;
+                fest = 100;
+            }
+                if (fest <= 30 || flüssig <= 0.5) {
+                        return false;
+                        }
+                else if(fest >= 30 && flüssig >= 0.5){
+                    return true;
+                }
+            }
+
+        async function ständeNiedrig(){
+            terminal.clear();
+            console.log("WARNUNG: Füll- und Reinigungsstand prüfen! Vorgang wird abgebrochen.");
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+        }
+
+        function getränkeStatistik(wurdeGebrüht){                                   //Statistik erhöhen
+         if(wurdeGebrüht){
+
+                const statPlus = wurdeGebrüht.toLowerCase();
+
+                switch(statPlus){
+
+                    case"kaffee":
+                        statKaffee++
+                        gebruehteGetraenke++;
+                        durchgängeSeitreinigung++;
+                        break;
+
+                    case"milch":
+                        statMilch++;
+                        gebruehteGetraenke++;
+                        durchgängeSeitreinigung++;
+                        break;
+
+                    case"kakao":
+                        statKakao++;
+                        gebruehteGetraenke++;
+                        durchgängeSeitreinigung++;
+                        break;
+
+                    case"brühe":
+                        statBrühe++;
+                        gebruehteGetraenke++;
+                        durchgängeSeitreinigung++;
+                        break;
+                }
+            }
+        }        
+
+
+        function betriebsstoffeReduzieren(wurdeGebrüht){                             //Betriebsstoffe reduzieren
+            if(wurdeGebrüht){
+
+                const auswahl = wurdeGebrüht.toLowerCase();
+                switch(auswahl){
+
+
+                    case"kaffee":
+                        bohnen -= 10;
+                        wasser -= 0.3;
+                        break;
+
+                    case"milch":
+                        milch -= 0.3;
+                        break;
+
+                    case"kakao":
+                        kakao -= 10;
+                        milch -= 0.3;
+                        break;
+
+                    case"brühe":
+                        wasser -= 0.3;
+                        brühe -= 10;
+                        break;
+                }
+            }
+
+        }
+
+        async function qualitätsbewertung(wurdeGebrueht) {                                      //Qualitätsbewertungsfunktion
+
+            if(wurdeGebrueht){
+
+                terminal.clear();
+                console.log("=== Qualitätsbewertung ===" + "\nWie hat dir dein BARRISTA 88 Getränk geschmeckt?" + "\nBitte bewerte von 1 (Schlecht) bis 5 (Perfekt):");
+                let bewertung = await terminal.ask("Deine Wahl: ")
+
+                if (bewertung === "5") {
+                    terminal.clear();
+                    console.log("Vielen Dank! Ein perfekter Kaffee für einen perfekten Tag.");
+                    await terminal.ask("Beliebige Taste drücken>");
+                    bewertung5++;
+                    anzahlBewertungen++;
+                }
+                else if (bewertung === "4" || bewertung === "3") {
+
+                    terminal.clear();
+                    console.log("Danke für dein Feedback. Wir arbeiten daran, noch besser zu werden.");
+                    await terminal.ask("Beliebige Taste drücken>");
+                        switch(bewertung){
+                            case"4":
+                                bewertung4++
+                                anzahlBewertungen++;
+                                break;
+
+                            case"3":
+                                bewertung3++;
+                                anzahlBewertungen++;
+                                break;
+                        }
+                }
+                else if (bewertung === "2" || bewertung === "1") {
+
+                    terminal.clear();
+                    console.log("Das tut uns leid! Wir werden die Maschine umgehend überprüfen lassen.");
+                     await terminal.ask("Beliebige Taste drücken>");
+
+                        switch(bewertung){
+                            case"2":
+                                bewertung2++;
+                                anzahlBewertungen++;
+                                break;
+
+                            case"1":
+                                bewertung1++;
+                                anzahlBewertungen++;
+                                break;
+                        }
+                }
+                else {
+                    await fehlermeldung();
+                    await qualitätsbewertung(wurdeGebrueht);
+                }
+            }
+        }
+
+
+        async function geheimesMenü(){                                              //Geheimmenü
+
+               while(true){
+                    terminal.clear();
+
+                    if(fehler === 3){
+                        console.log("Zu viele Fehleingaben.");
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        await abbruch();
+                        break;
+                    }
+                    else if(fehler < 3){
+
+                        let antwort1 = await terminal.ask("Welches ist die Höchstgeschwindigkeit einer unbeladenen Schwalbe? (\"Abbruch\" führt zum Hauptmenü)>");
+
+                        if(antwort1.toLowerCase().includes("europäische") && antwort1.toLowerCase().includes("afrikanische") && antwort1.toLowerCase().includes("schwalbe")){
+                            terminal.clear();
+                            console.log("Ahhhhh");
+
+                            let antwort2 = await terminal.ask("Die Antwort auf die ultimative Frage nach dem Leben, dem Universum und dem ganzen rest: (\"Abbruch\" führt zum Hauptmenü)>");
+
+                                if(antwort2 === "42"){
+                                    terminal.clear();
+                                    console.log("Hurra! Sie haben das geheime Menü gefunden");
+
+                                    let eingabe = await terminal.ask("Geheimen Modus ausführen? J/N>");
+
+                                        switch(eingabe.toLowerCase()){
+
+                                            case"j":
+                                                geheimnis = true;
+                                                console.log("\nSecretmodus gestartet...");
+                                                const balkenBreite = 5;
+                                                for (let i = 0; i <= balkenBreite; i++) {
+                                                    terminal.clear();
+                                                    console.log("Zusatzmodule werden intialisiert...");
+                                                    let geladen = "X".repeat(i);
+                                                    let leer = "-".repeat(balkenBreite - i);
+                                                    console.log(`[${geladen}${leer}]`);                                                    
+                                                    await new Promise(resolve => setTimeout(resolve, 400));
+                                                    }
+                                                console.log("Zusatzmodule stehen zur Verfügung!\n");
+                                                await new Promise(resolve => setTimeout(resolve, 800));
+                                                break;
+
+                                            case"n":
+                                                await abbruch();
+                                        }
+                                        break;
+                                }
+                                else if(antwort2.toLowerCase() === "abbruch"){
+                                    await abbruch();
+                                    await hauptmenü();
+                                    break;
+                                }
+                                else{
+                                    await fehlermeldung();
+                                    fehler++;
+                                }
+                        }
+                        else if(antwort1.toLowerCase() === "abbruch"){
+                            await abbruch();
+                            await hauptmenü();
+                            break;
+                        }
+
+
+                        else {
+                            await fehlermeldung();
+                            fehler++;
+                        }
+                }
+                }
+           }
+   
+
+           async function spezialMenü(){                                                                                //Spezialmenü
+                terminal.clear();
+
+                const spezialGetränke = ["Long Island Ice Tea", "Pina Colada" , "Gin Tonic" , "Moscow Mule" , "White Russian"];
+
+                for(let i = 0; i < spezialGetränke.length; i++){
+                    console.log(spezialGetränke[i]);  
+                }
+                    console.log("Abbrechen");
+
+                    let wahl = await terminal.ask("Bitte wählen:>");
+
+                        switch(wahl.toLowerCase()){
+
+                            case"long island ice tea":                          
+                            case"pina colada":
+                            case"gin tonic":
+                            case"moscow mule":
+                            case"white russian":
+                                terminal.clear();
+                                console.log("Nicht während der Arbeit!");
+                                await terminal.ask("Beliebige Taste drücken>");
+                                await spezialMenü();
+                                break;
+
+                            case"abbrechen":
+                                break;
+
+
+                            default:
+                                await fehlermeldung();
+                                await spezialMenü();
+
+                        }
+            }  
+
+            //Hauptprogramm & Terminal
+
+            while (!power) {
+                                                  //Grundschleife Maschine Aus                                                
+                statusAnAus();
+                const value = await terminal.ask(" Einschalten J/N?:> ");
+
+                switch (value.toLowerCase()) {
+
+                    case "j":
+                        anAus();
+                        statusAnAUs();
+                        break;
+
+                    case "n":
+                        break;
+
+
+                    default:
+                        await fehlermeldung();
+                        break;
+                }
+
+            while(power) {                                                    //Schleife Maschine EIN
+
+                anzeige();
+                const auswahl = await hauptmenü();
+
+                switch (auswahl.toLowerCase()) {
+
+                    case "getränke":
+                        anzeige();
+
+                        const getränkewahl = await getränkeMenü();
+                        const bezahlt = await bezahlen(getränkewahl);
+
+                        if (bezahlt){
+                            const getränkZubereitet = await bruehfunktion(getränkewahl);
+                            getränkeStatistik(getränkZubereitet);
+                            betriebsstoffeReduzieren(getränkZubereitet);
+                            await qualitätsbewertung(getränkZubereitet);
+                        } 
+                        break;
+
+                    case "auffüllen":
+                        terminal.clear();
+                        anzeige();
+                        await auffüllen();
+                        break;
+
+                    case "reinigen":
+                        terminal.clear();
+                        await fuehreReinigungAus();
+                        break;
+
+                    case "statistik":
+                        terminal.clear();
+                        await statistikAnzeigen(gebruehteGetraenke);
+                        break;
+
+                    case"?":
+                        await geheimesMenü();
+                        break;
+
+                    case"spezial":
+                        if(geheimnis){
+                            await spezialMenü();
+                        }
+                        else{
+                            await fehlermeldung();
+                        }
+                        break;
+
+                    case "abschalten":
+                        anAus();
+                        break;
+
+                    default:
+                       await fehlermeldung();
+                       break;
+                }
+                }
+    }
