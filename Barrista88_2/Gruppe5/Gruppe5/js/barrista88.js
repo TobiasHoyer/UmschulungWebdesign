@@ -3,6 +3,8 @@
             const powerButton = document.getElementById("power");
             const ausDisplay = document.getElementById("aus");
             const anDisplay = document.getElementById("hauptmenü");
+            const getränkeMenü = document.getElementById("getränke");
+            const spezielMenü = document.getElementById("secret");
 
             let power = false;
 
@@ -92,22 +94,5 @@
                 anAus();  //Programmstart*/
 
 
-
-                /*powerButton.addEventListener ("click", function (){  
-                    power = !power;
-                    anzeige();
-                })
-            
-
-            function anzeige(){
-                if(power){
-                    displayElement.innerText = "Die Maschine ist an.";
-                }
-                else{
-                    displayElement.innerText = "Die Maschine ist aus.";
-                }
-            }
-             
-            anzeige();  Code für Dokumentation u. Übung */
 
 

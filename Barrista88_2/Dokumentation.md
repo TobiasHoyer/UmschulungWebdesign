@@ -203,9 +203,10 @@ Ich habe also ein weiteres DIV in meinem Display-Container erstellet, welches nu
         
         </div>
 ```
-Dazu kam ein Bild, welches den "Aus"-Zustand darsteöllen sollte. 
+Dazu kam ein Bild, welches den "Aus"-Zustand darstellen sollte. 
 
 In CSS habe ich das ganze entsprechend meinen Vorstellungen gestylt:
+
 ```CSS
 #hauptmenü {
     display: grid;
@@ -306,6 +307,10 @@ Das fertige Resultat sieht dann so aus:
 _Abbildung: Maschine ist aus_
 ![Bild des Hauptmenüs](./Dokumentation/Hauptmenü.png)
 _Abbildung: Die Maschine ist An und zeigt das Hauptmenü_
+
+Ich habe die Webseite zu Testzwecken auf meinem Mobiltelefon geöffnet. Die Darstellung war im Vergleich zm Browser verzerrt: 
+
+![Bild Telefondisplay](./Dokumentation/IMG_4588.png)
 
 
 

@@ -1,0 +1,69 @@
+<style>
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px; 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: black;
+  }
+
+  .grid-button {
+    background-color: transparent; 
+    color: white; 
+    border: 2px solid white; 
+    border-radius: 12px; 
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 1px; 
+    
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    
+    transition: all 0.2s ease; 
+  }
+
+  .grid-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+    transform: scale(1.02); 
+  }
+
+  .grid-button img {
+    height: 60px; 
+    width: auto; 
+    display: block;
+  }
+</style>
+<div class="grid-container">
+  <button class="grid-button">
+    <img src="../assets/getränke.jpg"
+         alt="Bild für das Getränkemenü">
+    Getränke</button>
+  <button class="grid-button">
+    <img src="../assets/Auffüllen.png"
+         alt="Bild für das Auffüllmenü">
+    Auffüllen</button>
+  <button class="grid-button">
+    <img src="../assets/reinigen.jpg"
+         alt="Bild für das Reinigungsmenü">
+    Reinigen</button>
+  <button class="grid-button">
+    <img src="../assets/Statistikjpg.jpg"
+         alt="Bild für das Statistikmenü">
+    Statistik</button>
+  <button class="grid-button">
+    <img src="../assets/fragezeichen.png"
+         alt="Bild für das Geheimmenü">
+    ?</button>
+  <button class="grid-button">
+    <img src="../assets/special.jpg"
+         alt="Bild für das Spezialmenü">
+    Spezial</button>
+</div>
