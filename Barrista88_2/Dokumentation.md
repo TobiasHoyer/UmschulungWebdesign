@@ -138,8 +138,7 @@ Dazu eine "if" Abfrage die den Power Status checkt und eine entsprechende Meldun
              
             anzeige();
 ```
- Mithilfe von CSS habe ich zum Einen die Rahmen auskommentiert und zum Anderen den Text im Display dann rot anzeigen lassen. Ich habe überprüft, ob die einfache Funktionalität des An- und Ausschaltens gegeben war. 
-Dabei hat sich zuerst nichts getan, da in meinem ersten Versuch der Klick auf den Power-Knopf die Anzeigefunktion nicht nochmal wieder aufgerufen hat. Oben ist bereits der korrigierte Code zu lesen, der über volle Funktionalität verfügt.
+Mithilfe einer CSS-Media-Query fange ich das Hochformat ab und drehe den Inhalt um 90 Grad, um eine querformatige Darstellung zu simulieren. Dadurch wird der Endnutzer dazu bewegt, das Gerät ins Querformat zu drehen oder die Anwendung auf einem geeigneten Gerät zu nutzen
 
 ![Beispielbild Maschine An](./Dokumentation/AnAus.png)
 _Abbildung: Erste Funktionalität und Ausgabe im HTML Dokument_
@@ -308,9 +307,183 @@ _Abbildung: Maschine ist aus_
 ![Bild des Hauptmenüs](./Dokumentation/Hauptmenü.png)
 _Abbildung: Die Maschine ist An und zeigt das Hauptmenü_
 
-Ich habe die Webseite zu Testzwecken auf meinem Mobiltelefon geöffnet. Die Darstellung war im Vergleich zm Browser verzerrt: 
+## Erste Tests und Fehlerbehebung
+
+Ich habe die Webseite zu Testzwecken auf meinem Mobiltelefon geöffnet. Die Darstellung im Hochformat war im Vergleich zm Browser verzerrt: 
 
 ![Bild Telefondisplay](./Dokumentation/IMG_4588.png)
+
+Über eine Media Query in CSS fange ich das Hochformat ab und drehe den Inhalt um 90 Grad, um eine querformatige Darstellung zu simulieren und den Endnutzer so dazu zu bewegen, das Gerät zu wenden oder gleich ein anderes zu nutzen.
+
+```CSS
+
+ @media all and (orientation: portrait) {
+  body {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    width: 100vh;
+    height: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+}
+
+```
+In dem vorherigen Bild ista uch zu erkennen, dass einige der Auswahlelemente nicht in as Display passten und darüber hinaus ragten. Dies war auch in einem späteren Menü im Querformat der Fall:
+
+![Bild ELemente stehen über](./Dokumentation/Buttons.png)
+_Abbildung: Elemente ragen übers Display hinaus_
+
+Mithilfe von KI bin ich dann zu folgender Lösung gekommen:
+
+```CSS
+#spezialmenü {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+```
+Das Menü ist nun 3 Spalten breit und 2 Reihen hoch statt andersherum und: 
+
+```CSS
+  .grid-button {
+    overflow: hidden;
+    min-height: 0;
+  }
+```
+
+Die einzelnen Elemente haben nun keine Minimalgröße mehr und durch **overflow:hidden; ** wird beim Verändern der Größe in den Elementen alles was üpbersteht abgeschnitten und dadurch verhindert, dass diese über das Elternelement hinausragen.
+
+![Bild von dem neuen, geordnetem Menü](./Dokumentation/bfunktionierendes%20Menü.png)
+_Abbildung:Das Menü ist jeztzt neu angeordnet un steht nicht über.
+
+![Bild kleines Display im Querformat](./Dokumentation/Kleines%20Display.png)
+_Abbildung: Auch auf einem kleineren Display im Querformat steht nichts mehr über_
+
+Nun sind auf einem kleineren Display die Elemente nicht kalr zu identifizieren, as zeigt aber auch kalr an, dass diese Anwendung nicht für ein entsprechendes Gerät geeignet ist.
+Das Display selbst verschiebt sich zwar, das steht auf meiner Prioritätsliste aber sehr weit unten im Moment.
+
+
+## Letzte Schritte zu voller Funktionsfähigkeit
+
+Ich habe die Untermenüs in denen eine Auswahl getroffen werden soll ebenso aufgebaut, wie das HAuptmenü und mit passenden Bildern versehen.
+
+ich habe eine Variable angelegt, welche die Nutzerwahl speichert
+
+```JavaScript
+let auswahl;
+```
+Dazu kamen verschieden Konstanten für die einzelnen Elemente
+```JavaScript
+    const powerButton = document.getElementById("power");
+            const ausDisplay = document.getElementById("aus");
+            const anDisplay = document.getElementById("hauptmenü");
+            const getränkeMenü = document.getElementById("getränkemenü");
+            const spezialMenü = document.getElementById("spezialmenü");
+```
+Dazu jeweil einen Event Listener, welcher auf einen Klick reagiert, und die entsprechende Auswahl in die Variable einträgt
+```JavaScript
+                //Hauptmenü-knöpfe
+                btnGetränke.addEventListener("click", function(){
+                    if(!power) return;
+                    auswahl="getränke";
+                    zeigeMenü();
+                });
+
+                btnAuffüllen.addEventListener("click", function(){
+                    if(!power) return;
+                    auswahl="auffüllen";
+                });
+
+                btnReinigen.addEventListener("click", function(){
+                    if(!power) return;
+                    auswahl="reinigen";
+                });
+
+                btnStatistik.addEventListener("click", function(){
+                    if(!power) return;
+                    auswahl="statistik";
+                });
+
+                btnGeheim.addEventListener("click", function(){
+                    if(!power) return;
+                    auswahl="geheim";
+                });
+
+                btnSpezial.addEventListener("click", function(){
+                    if(!power)return;
+                    auswahl="spezial";
+                    zeigeMenü();
+                });
+```
+Sowie eine Funktion, die dann aufgerufen wird, welche dann, je nach Wahl, die entsprechenden Klassen entweder versteckt oder sichtbar macht:
+
+```JavaScript
+  function zeigeMenü(){
+                    anDisplay.classList.add("versteckt");
+
+                    switch(auswahl){
+                        case "getränke":
+                            anDisplay.classList.add("versteckt");
+                            getränkeMenü.classList.remove("versteckt");
+                            btnAbbruch.classList.remove("versteckt");
+                            break;
+                        case "reinigen":
+                            anDisplay.classList.add("versteckt");
+
+                            btnAbbruch.classList.remove("versteckt");
+                            break;
+                        case "statistik":
+                            anDisplay.classList.add("versteckt");
+
+                            btnAbbruch.classList.remove("versteckt");
+                            break;
+                        case "auffüllen":
+                            anDisplay.classList.add("versteckt");
+
+                            btnAbbruch.classList.remove("versteckt");
+                            break;
+                        case "geheim":
+                            anDisplay.classList.add("versteckt");
+
+                            btnAbbruch.classList.remove("versteckt");
+                            break;
+                        case "spezial":
+                            anDisplay.classList.add("versteckt")
+                            spezialMenü.classList.remove("versteckt");
+                            btnAbbruch.classList.remove("versteckt");
+                            break;
+                    }
+                }
+```
+Nach diesen Prinzipiedn habe ich alle Menüs aufgebaut und nach und nach Funktionen aus dem vorherigen Projekt übernommen und etwas abgeändert um die Funkton mit der neuen Anwendung zu ermöglichen: 
+```JavaScript
+  function betriebsstoffePrüfen(auswahl){
+                    switch(auswahl){
+                        case "Kaffee":
+                            if(bohnen >=30 && wasser >=0.4) return true;
+                            else return false;
+                            break;
+                        case "Brühe":
+                            if(brühe >= 30 && wasser >= 0.4) return true;
+                            else return false;
+                            break;
+                        case"Kakao":
+                            if(milch >= 0.4 && kakao >= 30) return true;
+                            else return false;
+                        case"Milch":
+                            if(milch >= 0.4)return true;
+                            else return false;
+                    }
+                }
+``` 
+_Beispiel: Funktion zum Prüfen der Betriebsstoffe, jetzt angepasst auf die neue Anwendung_
+
+
+
+
 
 
 
