@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/barrista88.js" defer></script>
+    <title>Barrista88</title>
+</head>
+<body>
+        <div class="maschinencontainer">
+      
+        <img src="../assets/Kaffee.png"
+             alt="Bild einer Kaffeemaschine" class="kaffeemaschine"> 
+         
+        <div id="display">
+
+            <img src="../assets/off.png"
+                 alt="Power aus Symbol"
+                 id = "aus">
+            
+            <div id="hauptmenü">
+                <button class="grid-button"
+                        id="getränke">
+                    <img src="../assets/getränke.jpg"
+                        alt="Bild für das Getränkemenü">
+                    Getränke</button>
+                <button class="grid-button"
+                        id="auffüllen">
+                    <img src="../assets/Auffüllen.png"
+                        alt="Bild für das Auffüllmenü">
+                    Auffüllen</button>
+                <button class="grid-button"
+                        id="reinigen">
+                    <img src="../assets/reinigen.jpg"
+                        alt="Bild für das Reinigungsmenü">
+                    Reinigen</button>
+                <button class="grid-button"
+                        id="statistik">
+                    <img src="../assets/Statistikjpg.jpg"
+                        alt="Bild für das Statistikmenü">
+                    Statistik</button>
+                <button class="grid-button"
+                        id="geheim">
+                    <img src="../assets/fragezeichen.png"
+                        alt="Bild für das Geheimmenü">
+                    ?</button>
+                <button class="grid-button"
+                        id="spezial">
+                    <img src="../assets/special.jpg"
+                        alt="Bild für das Spezialmenü">
+                    Spezial</button>
+            </div>
+            
+            <div id="getränkemenü"
+                 class="versteckt">
+                <button class="grid-button"
+                        id="kaffee">
+                <img src="../assets/Kaffee.jpg"
+                     alt="Bild einer Tasse Kaffee">
+                Kaffee
+                </button>
+                <button class="grid-button"
+                        id="brühe">
+                <img src="../assets/Brühe.jpg"
+                     alt="Bild einer TAsse Brühe">
+                Brühe
+                </button>
+                <button class="grid-button"
+                        id="kakao">
+                <img src="../assets/Kakao.jpg"
+                     alt="Bild einer TAsse Kakao">
+                Kakao
+                </button>
+                <button class="grid-button"
+                        id="milch">
+                <img src="../assets/Milch.jpg"
+                     alt="Bild eines Glaß heisser Milch">
+                Milch
+                </button>
+            </div>
+
+            <div id="reinigungsmenü"
+                 class="versteckt">
+                <p id ="reinugungsstatistik"></p>
+                <button id="start"
+                        class="grid-button">
+                <img src="../assets/reinigung.jpg"
+                     alt="Bild von Reinigungsutensilien">Reinigungsvorgang starten
+                    </button>
+            </div>
+
+            <div id="auffüllmenü"
+                 class="versteckt">
+                <p id="füllstatistik"></p>
+                <button id="auffüllung"
+                        class="grid-button">
+                <img src="../assets/Auffüllen.png"
+                    alt="Bild: Wasser wird aufgefüllt">Auffüllen
+                </button>    
+            </div>
+
+            <div id="untermenü"
+                 class="versteckt">
+                <button class="grid-button"
+                         id="auffüllenKaffee">
+                    <img src="../assets/Kaffeebohnen.webp"
+                         alt="Bild von Kaffeebohnen">                         
+                    Kaffee
+                </button>
+                <button class="grid-button"
+                         id="auffüllenKakao">
+                    <img src="../assets/Kakaopulver.webp">
+                    Kakao
+                </button>                
+                <button class="grid-button"
+                         id="auffüllenBrühe">
+                    <img src="../assets/Brühewebp.webp"
+                         alt="Bild dvon Pulverbrühe">
+                    Brühe
+                </button>
+                <button class="grid-button"
+                         id="auffüllenWasser">
+                    <img src="../assets/WasserAuffüllenn.webp"
+                         alt="Bild von Wasser">
+                    Wasser
+                </button>
+                <button class="grid-button"
+                         id="auffüllenMilch">
+                    <img src="../assets/Milch.jpg">
+                    Milch  
+                </button>
+                <button class="grid-button"
+                         id="auffüllenAlles">
+                    <img src="../assets/alles.webp"
+                         alt="Bild verschieener Heißghetränke">
+                    Alles        
+                </button>
+            </div>
+
+            <div id = "spezialmenü"
+                 class="versteckt">
+                 <button class="grid-button"
+                        id="iceT">
+                <img src="../assets/icet.webp"
+                     alt="Bild eines Long Island Ice Tea">
+                Long Island Ice Tea
+                </button>
+                <button class="grid-button"
+                        id="pina">
+                <img src="../assets/pinacolada.webp"
+                     alt="Bild eines Pina Colada">
+                Pina Colada
+                </button>
+                <button class="grid-button"
+                        id="gin">
+                <img src="../assets/gin.webp"
+                     alt="Bild eines Gin Tonic">
+                Gin Tonic
+                </button>
+                <button class="grid-button"
+                        id="moscow">
+                <img src="../assets/moscowmule.webp"
+                     alt="Bild eines Moscow Mule">
+                Moscow Mule
+                </button>
+                <button class="grid-button"
+                        id="russian">
+                <img src="../assets/whiterussian.webp"
+                     alt="Bild eines White Russian">
+                White Russian
+                </button>
+            </div>
+
+            <form class="versteckt"
+                   id="geheimmenü"
+                   onsubmit="return false;">
+                <fieldset>
+                <legend>Frage 1</legend>
+                <label for="frage1">Welches ist die Höchstgeschwindigkeit einer unbeladenen Schwalbe?</label>
+                <input type="text"
+                       id="frage1">
+                </fieldset>
+                
+                <fieldset>
+                <legend>Frage 2</legend>
+                <label for="frage2">Die Antwort auf die ultimative Frage nach dem Leben, dem Universum und dem ganzen rest: </label>
+                <input type="text"
+                        id="frage2">
+                </fieldset>
+                <button type="button"
+                        id="btnGeheimSenden"
+                        class="grid-button">Antworten überprüfen</button>
+            </form>
+
+
+            <button class="grid-button"
+                    id="abbruch">
+            <img src="../assets/abbruch.png"
+                  alt="Bild eines roten X">
+            
+            </button>
+
+            <button class="grid-button"
+                    id="zurück">
+                <img src="../assets/zurück.webp"
+                     alt="Zurücksymbol">
+                Zurück    
+            </button>
+            <p id="fortschritt"></p>
+        </div>
+
+        <div id="power"></div>
+
+    </div>
+
+</body>
+</html>
+>
