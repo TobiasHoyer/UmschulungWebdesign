@@ -403,7 +403,8 @@
 
                 btnZurück.addEventListener("click", function(){
                     auffüllenUntermenü.classList.add("versteckt");
-                    auffüllMenü.classList.remove("versteckt");
+                    auswahl = "auffüllen";
+                    zeigeMenü();
                     btnZurück.classList.add("versteckt");
                 });
 
