@@ -328,7 +328,7 @@
                     if(!power) return;
                     auswahl="reinigen";
                     zeigeMenü();
-                    reinigenStatistik.innerText = "Durchgänge seit letzter Reinigung: " + gebruehteGetraenke;
+                    reinigenStatistik.innerText = "Durchgänge seit letzter Reinigung: " + durchgängeSeitreinigung;
                 });
 
                 btnStatistik.addEventListener("click", function(){
