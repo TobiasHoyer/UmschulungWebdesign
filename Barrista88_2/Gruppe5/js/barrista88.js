@@ -413,7 +413,7 @@
                     getränkeMenü.classList.add("versteckt");
                     btnAbbruch.classList.add("versteckt");
                     const brühen = betriebsstoffePrüfen("Kaffee");
-                    if(brühen && gebruehteGetraenke < 5) {
+                    if(brühen && durchgängeSeitreinigung < 5) {
                         await zeigeLadebalken("Kaffee");
                         bohnen -= 10;
                         wasser -= 0.3;
@@ -432,7 +432,7 @@
                     getränkeMenü.classList.add("versteckt");
                     btnAbbruch.classList.add("versteckt");
                    const brühen = betriebsstoffePrüfen("Brühe");
-                    if(brühen && gebruehteGetraenke < 5) {
+                    if(brühen && durchgängeSeitreinigung < 5) {
                         await zeigeLadebalken("Brühe");
                         brühe -= 10;
                         wasser -= 0.3;
@@ -450,7 +450,7 @@
                     getränkeMenü.classList.add("versteckt");
                     btnAbbruch.classList.add("versteckt");
                    const brühen = betriebsstoffePrüfen("Kakao");
-                    if(brühen && gebruehteGetraenke < 5) {
+                    if(brühen && durchgängeSeitreinigung < 5) {
                         await zeigeLadebalken("Kakao");
                         kakao -= 10;
                         milch -= 0.3;
@@ -468,7 +468,7 @@
                     getränkeMenü.classList.add("versteckt");
                     btnAbbruch.classList.add("versteckt");
                    const brühen = betriebsstoffePrüfen("Milch");
-                    if(brühen && gebruehteGetraenke < 5) {
+                    if(brühen && durchgängeSeitreinigung < 5) {
                         await zeigeLadebalken("Milch");
                         milch -= 0.3;
                         statMilch +=1;
