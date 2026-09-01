@@ -264,7 +264,6 @@
                 }
 
                 //Reinigungsfunktion
-
                 async function reinigungsFortschritt() {
                     for (let i = 0; i <= balkenBreite; i++) {
                     
@@ -303,6 +302,12 @@
                     power = !power;
                     anAus();
                 })
+
+                //Alkoholwarnung
+                function warnung(){
+                    alert("Nicht während der Arbeiszeit!");
+                    hauptMenü();
+                }
 
                 //Hauptmenü-knöpfe
                 btnGetränke.addEventListener("click", function(){
@@ -518,30 +523,15 @@
                 });
 
                 //Spezialauswahl
-                btnIceT.addEventListener("click", function(){
-                    alert("Nicht während der Arbeiszeit!");
-                    hauptMenü();
-                });
+                btnIceT.addEventListener("click", warnung);
 
-                btnPinaColada.addEventListener("click", function(){
-                    alert("Nicht während der Arbeiszeit!");
-                    hauptMenü();
-                });
+                btnPinaColada.addEventListener("click", warnung);
 
-                btnGin.addEventListener("click", function(){
-                    alert("Nicht während der Arbeiszeit!");
-                    hauptMenü();
-                });
+                btnGin.addEventListener("click", warnung);
 
-                btnMoscow.addEventListener("click", function(){
-                    alert("Nicht während der Arbeiszeit!");
-                    hauptMenü();
-                });
+                btnMoscow.addEventListener("click", warnung);
 
-                btnRussian.addEventListener("click", function(){
-                    alert("Nicht während der Arbeiszeit!");
-                    hauptMenü();
-                });
+                btnRussian.addEventListener("click", warnung);
 
                     
                 //Programmstart
