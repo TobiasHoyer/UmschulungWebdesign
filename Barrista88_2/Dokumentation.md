@@ -556,9 +556,9 @@ Das fertige Menü ist nun voll funktionsfähig, optisch bin ich aber noch nicht 
 ![Bild des Geheimmenüs](./Dokumentation/Geheimmenü.png)
 _Abbildung: Fertiges Geheimmenü_
 
-## Testen und Fehlersuche
+## Testen, Fehlersuche und Finetuning
 
-nachdem ich alle Menüs erstellt und alle Funktionen eingefübt habe, habe ich getestet, ob das Endergebnis meiner Vorstellung entsprach. 
+Nachdem ich alle Menüs erstellt und alle Funktionen eingefübt habe, habe ich getestet, ob das Endergebnis meiner Vorstellung entsprach. 
 Dabei sind dann hier un da kleine Fehler aufgekommen, z.B. dass bestimmte Elemente nicht versteckt wurden, wenn die Menüs gewechselt wurden.
 
 Auch ist mir aufgefalen, dass die Fortschrittsanzeigen beim Getränke zubereiten/Reinigen weiterliefen, wenn der An/Aus Schalter betätigt wurden:
@@ -575,7 +575,29 @@ if(!power) return;
 
 Dadurch bricht der Vorgang ab, sobald die Maschine "aus" ist.
 
-Ich habe zum Abschluss (und periodisch nach Änderungen) meinen Code von der KI analysiern lassen, um mich auf Fehler hinweisen zu lassen, welche ich übersehen hatte. Auch zu Fragen bezüglich Syntax o-Ä. habe ich diese als Werkzeug hinzugezogen.
+Ich habe mit der Anwendung herumgespielt und mir den Code angeschaut. Dabei sind mir ein paar Redundanzen aufgefallen, welche ich beseitigt habe, indem ich Code in Funktionen zusammengefasst habe.
+
+So war z.B. zu jedem Event Listener der Elemente es Spezialmenüs folgender Code zugeordnet:
+
+```JavaScript
+    alert("Nicht während der Arbeiszeit!");
+    hauptMenü();
+```
+Daraus habe ich dann eine extra Funktion 
+```JavaScript
+function warnung(){
+    alert("Nicht während der Arbeiszeit!");
+    hauptMenü();
+}
+```
+ gemacht, welche bei Klick einfach abgerufen wird.
+Ein kleiner Stolperstein war hierbei die Übergabe im Event-Listener: Ursprünglich hatte ich 
+```JavaScript
+btnIceT.addEventListener("click", warnung());
+```
+geschrieben. Durch die Klammern **"( )"** wurde die Funktion jedoch sofort beim Laden der Seite ausgeführt statt erst beim Klick. Nach dem Entfernen der Klammern  wird die Funktion nun korrekt als Referenz übergeben und erst beim Klick getriggert.
+
+Ich habe zum Abschluss (und periodisch nach Änderungen) meinen Code von der KI analysiern lassen, um mich auf Fehler welche mir entgangen waren hinweisen zu lassen. Auch zu Fragen bezüglich Syntax o-Ä. habe ich diese als Werkzeug hinzugezogen.
 
 ## Abschließendes Fazit
 
@@ -584,9 +606,5 @@ Ich kam daurch zeitlich etwas in den Verzug, wodurch der letzte Ferinschliff und
 Gerade im Bereich CSS habe dich doch häufiger recherchieren oder die KI fragen müssen, was den Vorgang verlangsamt hat. 
 
 
-
-
-
-
-
+[?](https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1)
 
