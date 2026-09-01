@@ -206,27 +206,27 @@
                     switch(auswahl){
                         case"kaffee":
                             bohnen = maxBohnen;
-                            alert("Kaffee wure aufgefüllt");
+                            alert("Kaffee wurde aufgefüllt");
                             zeigeMenü();
                             break;
                         case"kakao":
                             kakao = maxKakao
-                            alert("Kakao wure aufgefüllt");
+                            alert("Kakao wurde aufgefüllt");
                             zeigeMenü();
                             break;
                         case"brühe":
                             brühe = maxBrühe;
-                            alert("Brühe wure aufgefüllt");
+                            alert("Brühe wurde aufgefüllt");
                             zeigeMenü();
                             break;
                         case"wasser":
                             wasser = maxWasser;
-                            alert("Wasser wure aufgefüllt");
+                            alert("Wasser wurde aufgefüllt");
                             zeigeMenü();
                             break;
                         case"milch":
                             milch = maxMilch;
-                            alert("Milch wure aufgefüllt");
+                            alert("Milch wurde aufgefüllt");
                             zeigeMenü();
                             break;
                         case"alles":
@@ -486,7 +486,7 @@
                     reinigungsMenü.classList.add("versteckt");
                     btnAbbruch.classList.add("versteckt");
                     await reinigungsFortschritt();
-                    gebruehteGetraenke = 0;
+                    durchgängeSeitreinigung = 0;
                 });
                 
                 //Geheimmenü-Check
