@@ -646,6 +646,8 @@ Also habe ich meinen Coe angepasst:
 Die zeigeMenü Funktion bestimmt anhand der Variable auswahl welches Menü "geladen" wird. 
 Da es nur dieses eine Untermenü gibt, setzt der Klick die Variable auf das Obermenü und ruft die zeigeMenü Funktion auf, welche dann die Statistikfunktion des Auffüllen-Menüs neu aufruft, wodurch died Stände dann aktualisiert werden.
 
+Das Geheimmenü war offen zugänglich, damit es seinem Namen gerecht wird, habe ich es versteckt.
+
 Ich habe zum Abschluss (und periodisch nach Änderungen) meinen Code von der KI analysiern lassen, um mich auf Fehler welche mir entgangen waren hinweisen zu lassen. Auch zu Fragen bezüglich Syntax o-Ä. habe ich diese als Werkzeug hinzugezogen.
 
 ## Abschließendes Fazit
