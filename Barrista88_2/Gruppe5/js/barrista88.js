@@ -17,7 +17,8 @@
             const btnStatistik = document.getElementById("statistik");
             const btnGeheim = document.getElementById("geheim");
             const btnSpezial = document.getElementById("spezial");
-    
+
+            let zubereitungAktiv = false;
 
             const btnKaffee = document.getElementById("kaffee");
             const btnBrühe = document.getElementById("brühe");
@@ -151,6 +152,13 @@
                             anDisplay.classList.add("versteckt");
                             geheimMenü.classList.remove("versteckt");
                             btnAbbruch.classList.remove("versteckt");
+                            btnZurück.classList.add("versteckt");
+                            getränkeMenü.classList.add("versteckt");
+                            spezialMenü.classList.add("versteckt");
+                            fortschritt.innerText = "";
+                            reinigungsMenü.classList.add("versteckt");
+                            auffüllMenü.classList.add("versteckt");
+                            auffüllenUntermenü.classList.add("versteckt");
                             break;
                         case "spezial":
                             anDisplay.classList.add("versteckt")
@@ -245,8 +253,10 @@
                 //Fortschrittsanzeigeunktion
                 async function zeigeLadebalken(auswahl) {
                     for (let i = 0; i <= balkenBreite; i++) {
+                    
+                    zubereitungAktiv = true;
 
-                    if(!power) return;
+                    if(!power) return false;
 
                     let geladen = "#".repeat(i);
                     let leer = "-".repeat(balkenBreite - i);
@@ -261,6 +271,7 @@
                      await new Promise(resolve => setTimeout(resolve, 800));
                     fortschritt.innerText = "";
                     hauptMenü();
+                    zubereitungAktiv = false;
                     return true;
                 }
 
@@ -391,7 +402,7 @@
                 });
 
                 btnGeheim.addEventListener("click", function(){
-                    if(!power) return;
+                    if(!power || zubereitungAktiv) return;
                     auswahl="geheim";
                     zeigeMenü();
                 });
