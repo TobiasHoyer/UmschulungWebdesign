@@ -303,10 +303,10 @@
                             durchgängeSeitreinigung +=1;    
                         
                     }
+                }
                     else {
                         alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
                         hauptMenü();
-                    }
                     }    
             }
 
