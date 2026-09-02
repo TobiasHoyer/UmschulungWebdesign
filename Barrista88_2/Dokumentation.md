@@ -597,6 +597,55 @@ btnIceT.addEventListener("click", warnung());
 ```
 geschrieben. Durch die Klammern **"( )"** wurde die Funktion jedoch sofort beim Laden der Seite ausgeführt statt erst beim Klick. Nach dem Entfernen der Klammern  wird die Funktion nun korrekt als Referenz übergeben und erst beim Klick getriggert.
 
+In dem Menü **Auffüllen** wird eine Statistik der Betriebsstoffe wie Kaffeebohnen, Wasser etc. angezeigt: 
+
+![Bild des Auffüllen-Meüs](./Dokumentation/Auffüllen.png)
+
+_Abbildung: Auffüllmenü_
+
+Es gibt Variablen für jede Zutat, jedes ausgegebene Getränk verringert die Stände in den Variablen.
+Eine Funktion erstellt ein Array aus den aktuellen Werten und stellt diese dar. Beim Öffnen des Menüs wird die Funktion aufegrufen
+
+```JavaScript
+  //Füllstände anzeigen
+function füllstandskontrolle(){
+    const stoffe = ["Kaffeebohnen", "Brühe", "Kakaopulver", "Wasser(l)", "Milch(l)"];
+    const stände = [bohnen, brühe, kakao, wasser, milch];
+
+    let ausgabe = "";
+
+    for(let i = 0; i < stoffe.length; i++){
+    ausgabe += `${stoffe[i]}: ${stände[i]}\n`;
+    }
+    füllStatistik.innerText = ausgabe;
+}
+```
+
+In dem Untermenü lässt sich jede Substanz einzeln auffüllen, oder direkt alle auf einmal.
+Zusätzlich gibt es ie Möglichkeit des Abbruches, welche direkt wieder ins Hauptmenü führt. 
+Beim Testen der Anwenung war mir das etas zu stark, ich wollte eine Möglichkeit haben, von dem Untermenü wieder zurück in das Obermenü zu wechseln. Also habe ich zusätzlich einen "Zurück" - Knopf implementiert: 
+
+![Bild UNtermenü mit Zurück-Knopf](./Dokumentation/Untermenü.png)
+
+_Abbildung: Untermenü_
+
+Zuerst hatte ich den Code so geschrieben, dass ein Klick auf das Element das Untermenü versteckt und das Obermenü einfach wieder sichtbar macht. Das hatte zur Folge, dass die Füllstände nicht aktualisiert wurden, da die Funktion dafür nicht erneut aufgerufen wurde. 
+Also habe ich meinen Coe angepasst:
+
+```JavaScript
+  //Zurück-Knopf
+
+                btnZurück.addEventListener("click", function(){
+                    auffüllenUntermenü.classList.add("versteckt");
+                    auswahl = "auffüllen";
+                    zeigeMenü();
+                    btnZurück.classList.add("versteckt");
+                });
+```
+
+Die zeigeMenü Funktion bestimmt anhand der Variable auswahl welches Menü "geladen" wird. 
+Da es nur dieses eine Untermenü gibt, setzt der Klick die Variable auf das Obermenü und ruft die zeigeMenü Funktion auf, welche dann die Statistikfunktion des Auffüllen-Menüs neu aufruft, wodurch died Stände dann aktualisiert werden.
+
 Ich habe zum Abschluss (und periodisch nach Änderungen) meinen Code von der KI analysiern lassen, um mich auf Fehler welche mir entgangen waren hinweisen zu lassen. Auch zu Fragen bezüglich Syntax o-Ä. habe ich diese als Werkzeug hinzugezogen.
 
 ## Abschließendes Fazit
