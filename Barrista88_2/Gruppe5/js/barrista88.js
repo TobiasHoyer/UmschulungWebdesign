@@ -57,6 +57,7 @@
             let auswahl;
             let spezialAuswahl;
             let wasFüllen;
+            let getränkewahl;
 
             const maxBohnen = 100;
             let bohnen = maxBohnen;
@@ -239,7 +240,6 @@
                             zeigeMenü();
                             break;
                     }
-
                 }
 
                 //Fortschrittsanzeigeunktion
@@ -261,7 +261,55 @@
                      await new Promise(resolve => setTimeout(resolve, 800));
                     fortschritt.innerText = "";
                     hauptMenü();
+                    return true;
                 }
+
+                //Getränk zubereiten
+                async function zubereiten(getränk){
+                
+                getränkeMenü.classList.add("versteckt");
+                    btnAbbruch.classList.add("versteckt");
+
+                    const brühen = betriebsstoffePrüfen(getränk);
+
+                    if(brühen && durchgängeSeitreinigung < 5) {
+
+                        const zubereitet = await zeigeLadebalken(getränk);  
+                        
+                        if(zubereitet){
+                            switch(getränk){
+                                case"Kaffee":
+                                    bohnen -=10;
+                                    wasser -=0.3;
+                                    statKaffee +=1;
+                                    break;
+                                case"Brühe":
+                                    brühe -=10;
+                                    wasser -=0.3;
+                                    statBrühe +=1;
+                                    break;
+                                case"Kakao":
+                                    kakao -=10;
+                                    milch -=0.3;
+                                    statKakao +=1;
+                                    break;
+                                case"Milch":
+                                    milch -= 0.3;
+                                    statMilch +=1;
+                                    break;
+                    }
+                            
+                            gebruehteGetraenke +=1;
+                            durchgängeSeitreinigung +=1;    
+                        
+                    }
+                    else {
+                        alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
+                        hauptMenü();
+                    }
+                    }    
+            }
+
 
                 //Reinigungsfunktion
                 async function reinigungsFortschritt() {
@@ -416,76 +464,25 @@
 
                 //Getränkeauswahl
                 btnKaffee.addEventListener("click", async function(){
-                    getränkeMenü.classList.add("versteckt");
-                    btnAbbruch.classList.add("versteckt");
-                    const brühen = betriebsstoffePrüfen("Kaffee");
-                    if(brühen && durchgängeSeitreinigung < 5) {
-                        await zeigeLadebalken("Kaffee");
-                        bohnen -= 10;
-                        wasser -= 0.3;
-                        statKaffee +=1;
-                        gebruehteGetraenke +=1;
-                        durchgängeSeitreinigung +=1;
+                    getränkewahl = "Kaffee";
+                    await zubereiten(getränkewahl);
+                    });
 
-                    }
-                    else {
-                        alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
-                        hauptMenü();
-                    }    
-                });
 
                 btnBrühe.addEventListener("click", async function(){
-                    getränkeMenü.classList.add("versteckt");
-                    btnAbbruch.classList.add("versteckt");
-                   const brühen = betriebsstoffePrüfen("Brühe");
-                    if(brühen && durchgängeSeitreinigung < 5) {
-                        await zeigeLadebalken("Brühe");
-                        brühe -= 10;
-                        wasser -= 0.3;
-                        statBrühe +=1;
-                        gebruehteGetraenke +=1;
-                        durchgängeSeitreinigung +=1;
-                    }
-                    else {
-                        alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
-                        hauptMenü();
-                    }    
-                })
+                   getränkewahl = "Brühe";
+                    await zubereiten(getränkewahl);
+                    });
 
                 btnKakao.addEventListener("click", async function(){
-                    getränkeMenü.classList.add("versteckt");
-                    btnAbbruch.classList.add("versteckt");
-                   const brühen = betriebsstoffePrüfen("Kakao");
-                    if(brühen && durchgängeSeitreinigung < 5) {
-                        await zeigeLadebalken("Kakao");
-                        kakao -= 10;
-                        milch -= 0.3;
-                        statKakao +=1;
-                        gebruehteGetraenke +=1;
-                        durchgängeSeitreinigung +=1;
-                    }
-                    else {
-                        alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
-                        hauptMenü();
-                    }    
-                })
+                   getränkewahl = "Kakao";
+                    await zubereiten(getränkewahl);
+                    });
 
                 btnMilch.addEventListener("click", async function(){
-                    getränkeMenü.classList.add("versteckt");
-                    btnAbbruch.classList.add("versteckt");
-                   const brühen = betriebsstoffePrüfen("Milch");
-                    if(brühen && durchgängeSeitreinigung < 5) {
-                        await zeigeLadebalken("Milch");
-                        milch -= 0.3;
-                        statMilch +=1;
-                        gebruehteGetraenke +=1;
-                        durchgängeSeitreinigung +=1;
-                    }
-                    else {
-                        alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
-                        hauptMenü();
-                    }    
-                })
+                   getränkewahl = "Milch";
+                    await zubereiten(getränkewahl);
+                    });
 
                 //Reinigungsvorgang
                 btnReinigungStarten.addEventListener("click", async function(){
@@ -496,7 +493,6 @@
                 });
                 
                 //Geheimmenü-Check
-
                 btnGeheimSenden.addEventListener("click", function(){
                     const geheim1 = frage1Input.value.toLowerCase();
                     const geheim2 = frage2Input.value.toLowerCase();
