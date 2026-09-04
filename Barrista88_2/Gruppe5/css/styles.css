@@ -1,0 +1,277 @@
+body{
+    margin:0%;
+    padding:0%;
+    background-color:black;
+
+}
+h1{
+    text-align:center;
+}
+
+
+.maschinencontainer{
+    /*border: 2px solid red;*/
+    position:relative;
+    width:100vw;
+    max-width: 100%;
+    height:100vh;
+    max-height:100%;
+    margin:0 auto;
+    aspect-ratio: 3 / 2;
+}
+
+.kaffeemaschine{
+    /*border: 2px solid red;*/
+    display:block;
+    width: 100%;
+    height: 100%;
+}
+
+.versteckt{
+    display: none !important;
+}
+
+#aus{
+    position: absolute;
+    top: 19%;
+    left: 26%;
+    /*border: 2px solid red;*/
+    margin: auto;
+    opacity:0.2;
+}
+
+#display{
+    /*border: 2px solid  red;*/
+    position: absolute;
+    top: 16.75%;     
+    left: 32.3%;   
+    width: 35%;   
+    height: 33%; 
+    background-color: black;
+    color: red;
+}
+
+#power{
+    /*border: 2px solid red;*/
+    position: absolute;
+    top:57%;
+    left: 69%;
+    width:3.75%;
+    height:6%;
+    cursor: pointer;
+}
+
+#hauptmenü {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px; 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: black;
+    align-content: center;
+}
+
+#hauptmenü .grid-button:nth-child(4) {
+    grid-column: 2;
+}
+
+#getränkemenü {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px; 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: black;
+    align-content: center;
+}
+
+#getränkemenü .grid-button:nth-child(4) {
+    grid-column: 2;
+}
+
+#spezialmenü {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px; 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: black;
+    align-content: center;
+}
+
+#auffüllmenü{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px; 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: black;
+    align-content: center;
+}
+
+#reinugungsmenü{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px; 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: black;
+    align-content: center;
+}
+
+#auffüllung{
+   position:absolute;
+    bottom:1%;
+    left: 17%;
+    width: 60%;
+    height: 32%;
+}
+
+#untermenü {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px; 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: black;
+    align-content: center;
+}
+
+
+  .grid-button {
+    background-color: transparent; 
+    color: white; 
+    border: 2px solid white; 
+    border-radius: 12px; 
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 1px; 
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px; 
+    width: 100%;
+    height: 100%; 
+    transition: all 0.2s ease; 
+  }
+
+  .grid-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+    transform: scale(1.02); 
+  }
+
+  .grid-button img {
+    /*height: 60px;*/
+    max-height: 40px; 
+    width: auto; 
+    display: block;
+  }
+
+  @media all and (orientation: portrait) {
+  body {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    width: 100vh;
+    height: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+}
+
+#fortschritt {
+
+    white-space: pre-line;
+    position: absolute;
+    left: 33%; 
+    top: 35%;
+    text-align: center;
+}
+
+#abbruch{
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+    width: 15%;
+    height: 15%;
+}
+
+#zurück{
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    width: 15%;
+    height: 15%;
+}
+
+#reinugungsstatistik{
+    position:absolute;
+    top: 30%;
+    right:5%;
+    text-align: center;
+    /*border: 2px solid red;*/
+    width:100%;
+
+}
+
+#start{
+    position:absolute;
+    bottom:1%;
+    left: 17%;
+    width: 60%;
+    height: 32%;
+}
+
+#geheim{
+    /*border: 2px solid red;*/
+    text-align: center;
+    color: rgb(53, 50, 50);
+    position: absolute;
+    top:57%;
+    left: 27%;
+    width:3.75%;
+    height:6%;
+    cursor: pointer;
+
+}
+
+#füllstatistik{
+width: 100%;
+text-align: center;
+position: absolute;
+top: 15%;
+right: 3%;
+}
+
+#geheimmenü{
+   
+padding-top: 10%;
+}
+
+#stats{
+    position:absolute;
+    text-align: center;
+    top: 25%;
+    left: 45%;
+}
