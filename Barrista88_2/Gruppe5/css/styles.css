@@ -33,8 +33,9 @@ h1{
 
 #aus{
     position: absolute;
-    top: 19%;
-    left: 26%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     /*border: 2px solid red;*/
     margin: auto;
     opacity:0.2;
