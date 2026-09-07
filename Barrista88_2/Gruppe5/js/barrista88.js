@@ -20,6 +20,7 @@
             const btnSpezial = document.getElementById("spezial");
 
             let zubereitungAktiv = false;
+            let tasseEntfernt = true;
 
             const btnKaffee = document.getElementById("kaffee");
             const btnBrühe = document.getElementById("brühe");
@@ -108,6 +109,7 @@
                     auffüllMenü.classList.add("versteckt");
                     auffüllenUntermenü.classList.add("versteckt");
                     statiscs.innerText ="";
+                    zubereitungAktiv = false;
                 }
             }
 
@@ -255,16 +257,19 @@
 
                 //Fortschrittsanzeigeunktion
                 async function zeigeLadebalken(auswahl) {
+
+                    kaffeeTasse.classList.remove("versteckt");
+                    tasseEntfernt = false;
+                    zubereitungAktiv = true;
+
                     for (let i = 0; i <= balkenBreite; i++) {
                     
-                    zubereitungAktiv = true;
 
                     if(!power) return false;
 
                     let geladen = "#".repeat(i);
                     let leer = "-".repeat(balkenBreite - i);
                     
-                    kaffeeTasse.classList.remove("versteckt");
         
                     fortschritt.innerText = `${auswahl} wird zubereitet...\n[${geladen}${leer}]`;
         
@@ -275,14 +280,6 @@
 
                     zubereitungAktiv = false;
 
-                    kaffeeTasse.addEventListener("click", function(){
-                        if(!zubereitungAktiv){
-                            kaffeeTasse.classList.add("versteckt");
-                            fortschritt.innerText = "";
-                            hauptMenü();
-                            zubereitungAktiv = false;
-                        }
-                });
                     return true;
                     }
                   
@@ -373,6 +370,23 @@
 
                 statiscs.innerText = ausgabe;
             }
+
+                //Tasse entfernen
+
+                function tasseEntfernen(){
+                    if(!zubereitungAktiv && !tasseEntfernt){
+                        kaffeeTasse.classList.add("versteckt");
+                        tasseEntfernt = true;
+                        fortschritt.innerText = "";
+                        if(power){
+                            hauptMenü();
+                        }
+                        
+                    }
+                }
+
+                kaffeeTasse.addEventListener("click", tasseEntfernen);
+                
 
                 //An-Aus Knopf
                 powerButton.addEventListener("click", function (){  
