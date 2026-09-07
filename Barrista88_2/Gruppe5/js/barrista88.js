@@ -379,7 +379,7 @@
                         tasseEntfernt = true;
                         fortschritt.innerText = "";
                         if(power){
-                            hauptMenü();
+                            zeigeMenü();
                         }
                         
                     }
