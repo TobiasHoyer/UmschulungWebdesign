@@ -434,7 +434,7 @@
                 });
 
                 btnGeheim.addEventListener("click", function(){
-                    if(!power || zubereitungAktiv) return;
+                    if(!power || zubereitungAktiv || !tasseEntfernt) return;
                     auswahl="geheim";
                     zeigeMenü();
                 });
@@ -493,7 +493,7 @@
                     statiscs.innerText = "";
                     reinigungsMenü.classList.add("versteckt");
                     auffüllenUntermenü.classList.add("versteckt");
-                    hauptMenü();
+                    hauptMenü(); 
                 });
 
                 //Zurück-Knopf
