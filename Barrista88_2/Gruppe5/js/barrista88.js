@@ -356,6 +356,7 @@
                      await new Promise(resolve => setTimeout(resolve, 800));
                     fortschritt.innerText = "";
                     hauptMenü();
+                    zubereitungAktiv = false;
                 }
               
                 //Statistikfunktion
