@@ -281,9 +281,9 @@
                             fortschritt.innerText = "";
                             hauptMenü();
                             zubereitungAktiv = false;
-                            return true;
                         }
                 });
+                    return true;
                     }
                   
                 
