@@ -104,12 +104,13 @@
                     getränkeMenü.classList.add("versteckt");
                     spezialMenü.classList.add("versteckt");
                     geheimMenü.classList.add("versteckt");
-                    fortschritt.innerText = "";
+                    fortschritt.classList.add("versteckt");
                     reinigungsMenü.classList.add("versteckt");
                     auffüllMenü.classList.add("versteckt");
                     auffüllenUntermenü.classList.add("versteckt");
-                    statiscs.innerText ="";
+                    statiscs.innerText = "";
                     zubereitungAktiv = false;
+                    auswahl= "";
                 }
             }
 
@@ -176,6 +177,8 @@
                             auffüllenUntermenü.classList.remove("versteckt");
                             btnZurück.classList.remove("versteckt");
                             break;
+                        default:
+                            hauptMenü();
 
                     }
                 }
@@ -261,23 +264,32 @@
                     kaffeeTasse.classList.remove("versteckt");
                     tasseEntfernt = false;
                     zubereitungAktiv = true;
+                    fortschritt.classList.remove("versteckt");
 
                     for (let i = 0; i <= balkenBreite; i++) {
                     
-
-                    if(!power) return false;
+                        if(!power) {
+                            zubereitungAktiv = false;
+                            fortschritt.classList.add("versteckt");    
+                            return false;
+                        }
 
                     let geladen = "#".repeat(i);
                     let leer = "-".repeat(balkenBreite - i);
-                    
         
                     fortschritt.innerText = `${auswahl} wird zubereitet...\n[${geladen}${leer}]`;
         
                      await new Promise(resolve => setTimeout(resolve, 300));
                     }
 
-                    fortschritt.innerText = `${auswahl} ist fertig! Bitte Tasse entnehmen`;
+                    if(!power) {
+                        zubereitungAktiv = false; 
+                        fortschritt.classList.add("versteckt");   
+                        return false;
+                    }
 
+
+                    fortschritt.innerText = `${auswahl} ist fertig! Bitte Tasse entnehmen`;
                     zubereitungAktiv = false;
 
                     return true;
@@ -293,7 +305,7 @@
 
                     const brühen = betriebsstoffePrüfen(getränk);
 
-                    if(brühen && durchgängeSeitreinigung < 5) {
+                    if(brühen && durchgängeSeitreinigung < 5 && tasseEntfernt) {
 
                         const zubereitet = await zeigeLadebalken(getränk);  
                         
@@ -325,6 +337,10 @@
                         
                     }
                 }
+                    else if(!tasseEntfernt){
+                        alert("Bitte Tasse entfernen");
+                        zeigeMenü();
+                    }
                     else {
                         alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
                         hauptMenü();
@@ -333,12 +349,17 @@
 
 
                 //Reinigungsfunktion
-                async function reinigungsFortschritt() {
-                    for (let i = 0; i <= balkenBreite; i++) {
-                    
+                async function reinigungsFortschritt() {                                        
                     zubereitungAktiv = true;
-                    
-                    if(!power) return;
+                    fortschritt.classList.remove("versteckt");
+                        
+
+                    for (let i = 0; i <= balkenBreite; i++) {
+                        if(!power) {
+                            zubereitungAktiv = false;
+                            fortschritt.classList.add("versteckt");
+                            return;
+                        }
                     
                     let geladen = "#".repeat(i);
                     let leer = "-".repeat(balkenBreite - i);
@@ -347,11 +368,26 @@
         
                      await new Promise(resolve => setTimeout(resolve, 300));
                     }
-    
+
+                    if (!power) {
+                        zubereitungAktiv = false;
+                        fortschritt.classList.add("versteckt");
+                        return;
+                    }
+
                     fortschritt.innerText = `Reinigungsvorgang abgeschlossen`;
 
                      await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                       
+                    if(!power) {
+                        zubereitungAktiv = false;
+                        fortschritt.classList.add("versteckt");
+                        return;
+                    }
+                    
                     fortschritt.innerText = "";
+                    fortschritt.classList.add("versteckt");
                     hauptMenü();
                     zubereitungAktiv = false;
                 }
@@ -486,14 +522,15 @@
 
                 //Abbruch-Knopf
                 btnAbbruch.addEventListener("click", function(){
-                    getränkeMenü.classList.add("versteckt");
-                    spezialMenü.classList.add("versteckt");
-                    geheimMenü.classList.add("versteckt");
-                    fortschritt.innerText = "";
-                    statiscs.innerText = "";
-                    reinigungsMenü.classList.add("versteckt");
-                    auffüllenUntermenü.classList.add("versteckt");
-                    hauptMenü(); 
+                        getränkeMenü.classList.add("versteckt");
+                        spezialMenü.classList.add("versteckt");
+                        geheimMenü.classList.add("versteckt");
+                        fortschritt.innerText = "";
+                        statiscs.innerText = "";
+                        reinigungsMenü.classList.add("versteckt");
+                        auffüllenUntermenü.classList.add("versteckt");
+                        auswahl = "";
+                        hauptMenü(); 
                 });
 
                 //Zurück-Knopf
@@ -575,8 +612,7 @@
 
                     
                 //Programmstart
-                anAus();  
-
+                anAus(); 
 
 
            
