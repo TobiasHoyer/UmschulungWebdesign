@@ -314,7 +314,6 @@ position: absolute;
 
 #roll{
     display:flex;
-    border: 2px solid red;
     position: absolute;
     top: 4%;
     left: 51%;
@@ -324,6 +323,7 @@ position: absolute;
     align-items:center;
     justify-content: center;
     opacity: 0.1;
+    font-size: 150%;
 }
 
 #roll:hover{
