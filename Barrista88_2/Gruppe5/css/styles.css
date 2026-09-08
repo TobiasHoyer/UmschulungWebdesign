@@ -311,3 +311,21 @@ position: absolute;
     width: 50%;
     color: red;
 }
+
+#roll{
+    display:flex;
+    border: 2px solid red;
+    position: absolute;
+    top: 4%;
+    left: 51%;
+    height: 10%;
+    width: 15%;
+    color: rgb(255, 255, 255);
+    align-items:center;
+    justify-content: center;
+    opacity: 0.1;
+}
+
+#roll:hover{
+    cursor: default;
+}
