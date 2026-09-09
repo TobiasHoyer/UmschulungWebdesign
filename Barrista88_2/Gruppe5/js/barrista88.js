@@ -283,6 +283,7 @@
                     let leer = "-".repeat(balkenBreite - i);
         
                     fortschritt.innerText = `${auswahl} wird zubereitet...\n[${geladen}${leer}]`;
+
         
                      await new Promise(resolve => setTimeout(resolve, 300));
                     }
@@ -342,14 +343,21 @@
                         
                     }
                 }
+                    else if(!brühen){ 
+                        alert("Betriebsstoffe auffüllen!");
+                        hauptMenü();
+                    }
+                    
+                    else if(durchgängeSeitreinigung >= 5) {
+                        alert("Maschine reinigen!");
+                        hauptMenü();
+                    }
+
                     else if(!tasseEntfernt){
                         alert("Bitte Tasse entfernen");
                         zeigeMenü();
                     }
-                    else {
-                        alert("Achtung! Betriebsstoffe & Reinigunszustand prüfen!");
-                        hauptMenü();
-                    }    
+
             }
 
 
