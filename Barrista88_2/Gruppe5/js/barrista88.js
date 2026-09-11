@@ -343,20 +343,24 @@
                         
                     }
                 }
-                    else if(!brühen){ 
-                        alert("Betriebsstoffe auffüllen!");
-                        hauptMenü();
-                    }
-                    
-                    else if(durchgängeSeitreinigung >= 5) {
-                        alert("Maschine reinigen!");
-                        hauptMenü();
-                    }
 
-                    else if(!tasseEntfernt){
-                        alert("Bitte Tasse entfernen");
-                        zeigeMenü();
-                    }
+                else if(durchgängeSeitreinigung >= 5 && !brühen) {
+                    alert("Maschine Reinigen und auffüllen!");
+                    hauptMenü();
+                }
+
+                else if(!brühen){ 
+                    alert("Betriebsstoffe auffüllen!");
+                    hauptMenü();
+                }
+                else if(durchgängeSeitreinigung >= 5) {
+                    alert("Maschine reinigen!");
+                    hauptMenü();
+                }
+                else if(!tasseEntfernt){
+                    alert("Bitte Tasse entfernen");
+                    zeigeMenü();
+                }
 
             }
 
